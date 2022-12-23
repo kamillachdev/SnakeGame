@@ -1,12 +1,12 @@
 #pragma once
 class board
 {
-private:
-	char gameBoard[25][25];
 public:
+	char gameBoard[25][25];
 	void fillBoard();
 	void printBoard();
 	void generateRandomApple();
 	
 };
 
+extern board boardObject;
