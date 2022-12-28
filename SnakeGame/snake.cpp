@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "snake.h"
 #include "board.h"
+#include "apple.h"
 
 using std::cout;
 
@@ -51,5 +52,14 @@ void snake::move()
 	case 4:
 		positionY--;
 		break;
+	}
+}
+
+
+void snake::eatApple()
+{
+	if (positionX == appleObject.positionX && positionY == appleObject.positionY)
+	{
+		appleObject.printScore();
 	}
 }

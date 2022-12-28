@@ -10,6 +10,7 @@ public:
 	void spawnSnake();
 	void changeDirection();
 	void move();
+	void eatApple();
 	inline void lengthIncrease();
 };
 

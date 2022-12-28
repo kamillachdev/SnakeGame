@@ -21,5 +21,6 @@ int main()
 		system("cls");
 		snakeObject.move();
 		snakeObject.changeDirection();
+		snakeObject.eatApple();
 	}
 }
