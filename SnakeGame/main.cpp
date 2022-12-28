@@ -1,11 +1,12 @@
 #include <iostream>
 #include "board.h"
 #include "snake.h"
-
+#include "apple.h"
 using std::cout;
 
 board boardObject;
 snake snakeObject;
+apple appleObject;
 
 int main()
 {
@@ -14,11 +15,11 @@ int main()
 	while (gameRunning)
 	{
 		boardObject.fillBoard();
-		boardObject.generateRandomApple();
+		snakeObject.spawnSnake();
+		appleObject.spawnApple();
 		boardObject.printBoard();
 		system("cls");
-		snakeObject.spawnSnake();
-		boardObject.printBoard();
-		gameRunning = 0;
+		snakeObject.move();
+		snakeObject.changeDirection();
 	}
 }

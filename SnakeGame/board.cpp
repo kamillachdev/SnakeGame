@@ -24,11 +24,3 @@ void board::printBoard()
 		std::cout << std::endl;
 	}
 }
-
-void board::generateRandomApple()
-{
-	srand(time(NULL));
-	int randomX = std::rand() % 25;
-	int randomY = std::rand() % 25;
-	gameBoard[randomX][randomY] = 'X';
-}
