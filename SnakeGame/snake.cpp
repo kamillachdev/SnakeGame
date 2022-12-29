@@ -42,15 +42,19 @@ void snake::move()
 	{
 	case 1:
 		positionY++;
+		boardObject.gotoxy(positionX, positionY - snakeLength); cout << "-";
 		break;
 	case 2:
 		positionX++;
+		boardObject.gotoxy(positionX - snakeLength, positionY); cout << "-";
 		break;
 	case 3:
 		positionY--;
+		boardObject.gotoxy(positionX, positionY + snakeLength); cout << "-";
 		break;
 	case 4:
 		positionX--;
+		boardObject.gotoxy(positionX + snakeLength, positionY); cout << "-";
 		break;
 	}
 }
