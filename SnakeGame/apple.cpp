@@ -5,7 +5,7 @@
 
 void apple::spawnApple()
 {
-	boardObject.gameBoard[positionX][positionY] = 'O';
+	boardObject.gotoxy(positionX, positionY); std::cout << 'O';
 }
 
 void apple::generateRandomPosition()
@@ -18,8 +18,12 @@ void apple::generateRandomPosition()
 
 void apple::printScore()
 {
-	appleScore++;
 	std::cout << "Your current score: " << appleScore;
+}
+
+void apple::addScore()
+{
+	appleScore++;
 }
 
 void apple::printBestScore()

@@ -2,8 +2,7 @@
 class board
 {
 public:
-	char gameBoard[25][25];
-	void fillBoard();
+	void gotoxy(int x, int y);
 	void printBoard();
 };
 

@@ -8,11 +8,11 @@ using std::cout;
 
 void snake::spawnSnake()
 {
-	int tempPositionY = positionY;
-	for (int i = 0; i < snakeLength; i++)
+	int tempPositionX = positionX;
+	for (int i = 1; i <= snakeLength; i++)
 	{
-		boardObject.gameBoard[positionX][tempPositionY] = '@';
-		tempPositionY--;
+		boardObject.gotoxy(tempPositionX, positionY); cout << '@';
+		tempPositionX--;
 	}
 }
 
@@ -41,16 +41,16 @@ void snake::move()
 	switch (direction)
 	{
 	case 1:
-		positionX--;
-		break;
-	case 2:
 		positionY++;
 		break;
-	case 3:
+	case 2:
 		positionX++;
 		break;
-	case 4:
+	case 3:
 		positionY--;
+		break;
+	case 4:
+		positionX--;
 		break;
 	}
 }
@@ -61,5 +61,19 @@ void snake::eatApple()
 	if (positionX == appleObject.positionX && positionY == appleObject.positionY)
 	{
 		appleObject.printScore();
+	}
+}
+
+bool snake::kill()
+{
+	if (positionX >= 1 && positionX < 40 && positionY >= 1 && positionY <20)
+	{
+		boardObject.gotoxy(7, 20); appleObject.printScore();
+		return false;
+	}
+	else
+	{
+		boardObject.gotoxy(7, 20); cout << "Game over! "; appleObject.printBestScore();
+		return true;
 	}
 }

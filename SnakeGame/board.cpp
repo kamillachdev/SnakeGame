@@ -1,26 +1,26 @@
 #include <iostream>
 #include <cstdlib>
+#include <windows.h>
 #include "board.h"
 
-void board::fillBoard()
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // used for goto
+COORD CursorPosition;
+
+void board::printBoard()
 {
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 40; i++)
 	{
-		for (int j = 0; j < 25; j++)
+		for (int j = 0; j < 20; j++)
 		{
-			gameBoard[i][j] = '-';
+			gotoxy(i, j); std::cout << '-';
 		}
 	}
 }
 
-void board::printBoard()
+
+void board::gotoxy(int x, int y)
 {
-	for (int i = 0; i < 25; i++)
-	{
-		for (int j = 0; j < 25; j++)
-		{
-			std::cout << gameBoard[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
+	CursorPosition.X = x;
+	CursorPosition.Y = y;
+	SetConsoleCursorPosition(console, CursorPosition);
 }

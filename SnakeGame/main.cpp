@@ -12,15 +12,17 @@ int main()
 {
 	bool gameRunning = 1;
 
+	boardObject.printBoard();
+
 	while (gameRunning)
 	{
-		boardObject.fillBoard();
 		snakeObject.spawnSnake();
 		appleObject.spawnApple();
-		boardObject.printBoard();
-		system("cls");
 		snakeObject.move();
+		if (snakeObject.kill())
+			gameRunning = 0;
+		/*
 		snakeObject.changeDirection();
-		snakeObject.eatApple();
+		snakeObject.eatApple();*/
 	}
 }
