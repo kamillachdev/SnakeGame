@@ -11,8 +11,8 @@ void apple::spawnApple()
 void apple::generateRandomPosition()
 {
 	srand(time(NULL));
-	positionX = std::rand() % 25;
-	positionY = std::rand() % 25;
+	positionX = std::rand() % 40;
+	positionY = std::rand() % 20;
 }
 
 

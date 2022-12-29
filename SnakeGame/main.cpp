@@ -21,8 +21,7 @@ int main()
 		snakeObject.move();
 		if (snakeObject.kill())
 			gameRunning = 0;
-		/*
 		snakeObject.changeDirection();
-		snakeObject.eatApple();*/
+		snakeObject.eatApple();
 	}
 }
