@@ -13,5 +13,6 @@ public:
 	void eatApple();
 	bool kill();
 	inline void lengthIncrease();
+	void reset();
 };
 

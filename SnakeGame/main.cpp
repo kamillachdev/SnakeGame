@@ -12,11 +12,13 @@ apple appleObject;
 int main()
 {
 	bool gameRunning = 1;
-	bool playAgain = 0;
+	bool waitForPressedKey = 0;
 
 	boardObject.printBoard();
-	do
+	while (true)
 	{
+		waitForPressedKey = 0;
+
 		while (gameRunning)
 		{
 			snakeObject.spawnSnake();
@@ -28,15 +30,22 @@ int main()
 			snakeObject.eatApple();
 		}
 
-		boardObject.gotoxy(6, 21); cout << "Right arrow - play again; Escape - quit;";
-		system("pause");
-		if (GetAsyncKeyState(VK_ESCAPE))
+		boardObject.gotoxy(0, 21); cout << "Right arrow - play again; Escape - quit;";
+
+		while (!waitForPressedKey)
 		{
-			return 0;
+			if (GetAsyncKeyState(VK_ESCAPE))
+			{
+				return 0;
+			}
+			else if (GetAsyncKeyState(VK_RIGHT))
+			{
+				waitForPressedKey = 1;
+				gameRunning = 1;
+				boardObject.gotoxy(0, 21); cout << "                                           ";
+				snakeObject.reset();
+				appleObject.reset();
+			}
 		}
-		else if (GetAsyncKeyState(VK_RIGHT))
-		{
-			playAgain = 1;
-		}
-	} while (playAgain);
+	}
 }

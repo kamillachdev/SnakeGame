@@ -79,12 +79,12 @@ bool snake::kill()
 {
 	if (positionX > 1 && positionX < 40 && positionY >= 0 && positionY <20)
 	{
-		boardObject.gotoxy(7, 20); appleObject.printScore();
+		boardObject.gotoxy(6, 20); appleObject.printScore();
 		return false;
 	}
 	else
 	{
-		boardObject.gotoxy(7, 20); cout << "Game over! "; appleObject.printBestScore();
+		boardObject.gotoxy(6, 20); cout << "Game over! "; appleObject.printBestScore();
 		return true;
 	}
 }
@@ -92,4 +92,17 @@ bool snake::kill()
 inline void snake::lengthIncrease()
 {
 	snakeLength++;
+}
+
+
+void snake::reset()
+{
+	for (int i = 1; i <= snakeLength; i++)
+	{
+		boardObject.gotoxy(positionX - i, positionY); cout << '-'; //removing old snake from the board 
+	}
+	snakeLength = 3; 
+	direction = 2;
+	positionX = 10;
+	positionY = 9;	 
 }

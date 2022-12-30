@@ -2,6 +2,7 @@
 #include "apple.h"
 #include "board.h"
 
+using std::cout;
 
 void apple::spawnApple()
 {
@@ -18,7 +19,7 @@ void apple::generateRandomPosition()
 
 void apple::printScore()
 {
-	std::cout << "Your current score: " << appleScore;
+	std::cout << "Your current score: " << appleScore << "                 ";
 }
 
 void apple::addScore()
@@ -32,4 +33,12 @@ void apple::printBestScore()
 		bestAppleScore = appleScore;
 
 	std::cout << "Your best score: " << bestAppleScore;
+}
+
+void apple::reset()
+{
+	boardObject.gotoxy(positionX, positionY); cout << '-'; //remove old apple form the board
+	appleScore = 0;
+	positionX = 30;
+	positionY = 9;
 }
