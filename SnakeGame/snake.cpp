@@ -44,22 +44,22 @@ void snake::move()
 	case 1:
 		positionY--;
 		boardObject.gotoxy(positionX, positionY - snakeLength - 1); cout << "-";
-		Sleep(200);
+		Sleep(150);
 		break;
 	case 2:
 		positionX++;
 		boardObject.gotoxy(positionX - snakeLength - 1, positionY); cout << "-";
-		Sleep(200);
+		Sleep(150);
 		break;
 	case 3:
 		positionY++;
 		boardObject.gotoxy(positionX, positionY + snakeLength - 1); cout << "-";
-		Sleep(200);
+		Sleep(150);
 		break;
 	case 4:
 		positionX--;
 		boardObject.gotoxy(positionX + snakeLength - 1,  positionY); cout << "-";
-		Sleep(200);
+		Sleep(150);
 		break;
 	}
 }
@@ -70,6 +70,7 @@ void snake::eatApple()
 	if (positionX == appleObject.positionX && positionY == appleObject.positionY)
 	{
 		appleObject.addScore();
+		lengthIncrease();
 		appleObject.generateRandomPosition();
 	}
 }
@@ -86,4 +87,9 @@ bool snake::kill()
 		boardObject.gotoxy(7, 20); cout << "Game over! "; appleObject.printBestScore();
 		return true;
 	}
+}
+
+inline void snake::lengthIncrease()
+{
+	snakeLength++;
 }
