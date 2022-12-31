@@ -43,22 +43,31 @@ void snake::move()
 	{
 	case 1:
 		positionY--;
-		boardObject.gotoxy(positionX, positionY - snakeLength - 1); cout << "-";
+		boardObject.gotoxy(positionX, positionY); cout << '@';
+		for (int i = 1; i <= snakeLength; i++)
+		{
+			boardObject.gotoxy(positionX - i, positionY + i); cout << "-";
+		}
+		boardObject.gotoxy(positionX, positionY + snakeLength); cout << "-";
+
 		Sleep(150);
 		break;
 	case 2:
 		positionX++;
-		boardObject.gotoxy(positionX - snakeLength - 1, positionY); cout << "-";
+		boardObject.gotoxy(positionX, positionY); cout << '@';
+		boardObject.gotoxy(positionX - snakeLength, positionY); cout << "-";
 		Sleep(150);
 		break;
 	case 3:
 		positionY++;
-		boardObject.gotoxy(positionX, positionY + snakeLength - 1); cout << "-";
+		boardObject.gotoxy(positionX, positionY); cout << '@';
+		boardObject.gotoxy(positionX, positionY - snakeLength); cout << "-";
 		Sleep(150);
 		break;
 	case 4:
 		positionX--;
-		boardObject.gotoxy(positionX + snakeLength - 1,  positionY); cout << "-";
+		boardObject.gotoxy(positionX, positionY); cout << '@';
+		boardObject.gotoxy(positionX + snakeLength,  positionY); cout << "-";
 		Sleep(150);
 		break;
 	}
@@ -77,7 +86,7 @@ void snake::eatApple()
 
 bool snake::kill()
 {
-	if (positionX > 1 && positionX < 40 && positionY >= 0 && positionY <20)
+	if (positionX >= 0 && positionX <= 39 && positionY >= 0 && positionY < 20)
 	{
 		boardObject.gotoxy(6, 20); appleObject.printScore();
 		return false;

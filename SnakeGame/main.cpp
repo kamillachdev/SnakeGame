@@ -18,12 +18,12 @@ int main()
 	while (true)
 	{
 		waitForPressedKey = 0;
+		snakeObject.spawnSnake();
 
 		while (gameRunning)
 		{
-			snakeObject.spawnSnake();
-			appleObject.spawnApple();
 			snakeObject.move();
+			appleObject.spawnApple();
 			if (snakeObject.kill())
 				gameRunning = 0;
 			snakeObject.changeDirection();
