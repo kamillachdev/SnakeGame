@@ -24,7 +24,7 @@ int main()
 		{
 			snakeObject.move();
 			appleObject.spawnApple();
-			if (snakeObject.kill())
+			if (snakeObject.killByBorder() || snakeObject.killBySnake())
 				gameRunning = 0;
 			snakeObject.changeDirection();
 			snakeObject.eatApple();

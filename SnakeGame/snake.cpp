@@ -4,17 +4,20 @@
 #include "board.h"
 #include "apple.h"
 
-
 using std::cout;
+
+char head = 'H';
+char tail = '@';
 
 void snake::spawnSnake()
 {
 	int tempPositionX = positionX;
 	for (int i = 1; i <= snakeLength; i++)
-	{
-		boardObject.gotoxy(tempPositionX, positionY); cout << '@';
+	{	
+		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX--;
 	}
+	boardObject.gotoxy(positionX, positionY); cout << head;
 }
 
 void snake::changeDirection()
@@ -37,37 +40,45 @@ void snake::changeDirection()
 	}
 }
 
-void snake::move()
+void snake::move() //here is work
 {
+	int tempPositionX = positionX;
+	int tempPositionY = positionY;
 	switch (direction)
 	{
 	case 1:
-		positionY--;
-		boardObject.gotoxy(positionX, positionY); cout << '@';
-		for (int i = 1; i <= snakeLength; i++)
-		{
-			boardObject.gotoxy(positionX - i, positionY + i); cout << "-";
-		}
-		boardObject.gotoxy(positionX, positionY + snakeLength); cout << "-";
 
+		positionY--;
+		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
+		tempPositionY++;
+		boardObject.gotoxy(positionX, positionY); cout << head;
 		Sleep(150);
 		break;
+
 	case 2:
+
 		positionX++;
-		boardObject.gotoxy(positionX, positionY); cout << '@';
-		boardObject.gotoxy(positionX - snakeLength, positionY); cout << "-";
+		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
+		tempPositionX--;
+		boardObject.gotoxy(positionX, positionY); cout << head;
 		Sleep(150);
 		break;
+
 	case 3:
+
 		positionY++;
-		boardObject.gotoxy(positionX, positionY); cout << '@';
-		boardObject.gotoxy(positionX, positionY - snakeLength); cout << "-";
+		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
+		tempPositionY--;
+		boardObject.gotoxy(positionX, positionY); cout << head;
 		Sleep(150);
 		break;
+
 	case 4:
+
 		positionX--;
-		boardObject.gotoxy(positionX, positionY); cout << '@';
-		boardObject.gotoxy(positionX + snakeLength,  positionY); cout << "-";
+		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
+		tempPositionX++;
+		boardObject.gotoxy(positionX, positionY); cout << head;
 		Sleep(150);
 		break;
 	}
@@ -78,13 +89,14 @@ void snake::eatApple()
 {
 	if (positionX == appleObject.positionX && positionY == appleObject.positionY)
 	{
+		boardObject.gotoxy(appleObject.positionX, appleObject.positionY); cout << head;
 		appleObject.addScore();
 		lengthIncrease();
 		appleObject.generateRandomPosition();
 	}
 }
 
-bool snake::kill()
+bool snake::killByBorder()
 {
 	if (positionX >= 0 && positionX <= 39 && positionY >= 0 && positionY < 20)
 	{
@@ -95,6 +107,21 @@ bool snake::kill()
 	{
 		boardObject.gotoxy(6, 20); cout << "Game over! "; appleObject.printBestScore();
 		return true;
+	}
+}
+
+bool snake::killBySnake() //here is work
+{
+	char charOnXY = '-';
+	boardObject.gotoxy(positionX, positionY); charOnXY = '@';
+	if (charOnXY == tail)
+	{
+		boardObject.gotoxy(6, 20); cout << "Game over! "; appleObject.printBestScore();
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

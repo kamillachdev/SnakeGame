@@ -11,7 +11,8 @@ public:
 	void changeDirection();
 	void move();
 	void eatApple();
-	bool kill();
+	bool killByBorder();
+	bool killBySnake();
 	inline void lengthIncrease();
 	void reset();
 };
