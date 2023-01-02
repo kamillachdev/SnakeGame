@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include <vector>
 #include "snake.h"
 #include "board.h"
 #include "apple.h"
@@ -16,6 +17,7 @@ void snake::spawnSnake()
 	{	
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX--;
+		tailLocations.push_back(std::make_pair(tempPositionX, positionY));
 	}
 	boardObject.gotoxy(positionX, positionY); cout << head;
 }
@@ -52,6 +54,7 @@ void snake::move() //here is work
 		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
 		tempPositionY++;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+		tailLocations.push_back(std::make_pair(positionX, positionY + 1));
 		Sleep(150);
 		break;
 
@@ -61,6 +64,7 @@ void snake::move() //here is work
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX--;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+		tailLocations.push_back(std::make_pair(positionX - 1, positionY));
 		Sleep(150);
 		break;
 
@@ -70,6 +74,7 @@ void snake::move() //here is work
 		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
 		tempPositionY--;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+		tailLocations.push_back(std::make_pair(positionX, positionY - 1));
 		Sleep(150);
 		break;
 
@@ -79,6 +84,7 @@ void snake::move() //here is work
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX++;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+		tailLocations.push_back(std::make_pair(positionX + 1, positionY));
 		Sleep(150);
 		break;
 	}
@@ -110,19 +116,18 @@ bool snake::killByBorder()
 	}
 }
 
-bool snake::killBySnake() //here is work
+
+bool snake::killBySnake() //here is work: get location of snake tail, if its the same as head location, then kill
 {
-	char charOnXY = '-';
-	boardObject.gotoxy(positionX, positionY); charOnXY = '@';
-	if (charOnXY == tail)
+	for (int i = 0; i < tailLocations.size(); i++)
 	{
-		boardObject.gotoxy(6, 20); cout << "Game over! "; appleObject.printBestScore();
-		return true;
+		if (positionX == tailLocations[i].first && positionY == tailLocations[i].second)
+		{
+			boardObject.gotoxy(6, 20); cout << "Game over! "; appleObject.printBestScore();
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 inline void snake::lengthIncrease()
