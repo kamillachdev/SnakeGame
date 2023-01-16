@@ -16,8 +16,8 @@ void snake::spawnSnake()
 	for (int i = 1; i <= snakeLength; i++)
 	{	
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
-		tempPositionX--;
 		tailLocations.push_back(std::make_pair(tempPositionX, positionY));
+		tempPositionX--;
 	}
 	boardObject.gotoxy(positionX, positionY); cout << head;
 }
@@ -50,16 +50,19 @@ void snake::move() //here is work
 {
 	int tempPositionX = positionX;
 	int tempPositionY = positionY;
+	boardObject.gotoxy(50, 20); cout << tailLocations.size();
+	
 	switch (direction)
 	{
 	case 1:
-
 		positionY--;
 		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
 		tempPositionY++;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+
+		tailLocations.erase(tailLocations.begin());
 		tailLocations.push_back(std::make_pair(positionX, positionY + 1));
-		
+		boardObject.gotoxy(tailLocations[0].first, tailLocations[0].second); cout << '-';
 		Sleep(150);
 		break;
 
@@ -69,7 +72,11 @@ void snake::move() //here is work
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX--;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+
+		tailLocations.erase(tailLocations.begin());
 		tailLocations.push_back(std::make_pair(positionX - 1, positionY));
+
+		boardObject.gotoxy(tailLocations[0].first, tailLocations[0].second); cout << '-';
 		Sleep(150);
 		break;
 
@@ -79,7 +86,11 @@ void snake::move() //here is work
 		boardObject.gotoxy(positionX, tempPositionY); cout << tail;
 		tempPositionY--;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+
+		tailLocations.erase(tailLocations.begin());
 		tailLocations.push_back(std::make_pair(positionX, positionY - 1));
+
+		boardObject.gotoxy(tailLocations[0].first, tailLocations[0].second); cout << '-';
 		Sleep(150);
 		break;
 
@@ -89,7 +100,11 @@ void snake::move() //here is work
 		boardObject.gotoxy(tempPositionX, positionY); cout << tail;
 		tempPositionX++;
 		boardObject.gotoxy(positionX, positionY); cout << head;
+
+		tailLocations.erase(tailLocations.begin());
 		tailLocations.push_back(std::make_pair(positionX + 1, positionY));
+
+		boardObject.gotoxy(tailLocations[0].first, tailLocations[0].second); cout << '-';
 		Sleep(150);
 		break;
 	}
@@ -122,7 +137,7 @@ bool snake::killByBorder()
 }
 
 
-bool snake::killBySnake() //here is work: get location of snake tail, if its the same as head location, then kill
+bool snake::killBySnake()
 {
 	for (int i = 0; i < tailLocations.size(); i++)
 	{
