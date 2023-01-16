@@ -26,19 +26,23 @@ void snake::changeDirection()
 {
 	if (GetAsyncKeyState(VK_UP))
 	{
-		direction = 1;
+		if(direction != 3)
+			direction = 1;
 	}
 	else if (GetAsyncKeyState(VK_RIGHT))
 	{
-		direction = 2;
+		if (direction != 4)
+			direction = 2;
 	}
 	else if (GetAsyncKeyState(VK_DOWN))
 	{
-		direction = 3;
+		if (direction != 1)
+			direction = 3;
 	}
 	else if (GetAsyncKeyState(VK_LEFT))
 	{
-		direction = 4;
+		if (direction != 2)
+			direction = 4;
 	}
 }
 
@@ -55,6 +59,7 @@ void snake::move() //here is work
 		tempPositionY++;
 		boardObject.gotoxy(positionX, positionY); cout << head;
 		tailLocations.push_back(std::make_pair(positionX, positionY + 1));
+		
 		Sleep(150);
 		break;
 
