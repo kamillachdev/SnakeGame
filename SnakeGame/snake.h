@@ -19,4 +19,3 @@ public:
 	inline void lengthIncrease();
 	void reset();
 };
-

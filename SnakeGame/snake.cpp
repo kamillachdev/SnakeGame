@@ -50,7 +50,6 @@ void snake::move() //here is work
 {
 	int tempPositionX = positionX;
 	int tempPositionY = positionY;
-	boardObject.gotoxy(50, 20); cout << tailLocations.size();
 	
 	switch (direction)
 	{
@@ -153,17 +152,19 @@ bool snake::killBySnake()
 inline void snake::lengthIncrease()
 {
 	snakeLength++;
+	tailLocations.push_back(std::make_pair(tailLocations[0].first, tailLocations[0].second));
 }
 
 
 void snake::reset()
 {
-	for (int i = 1; i <= snakeLength; i++)
+	for (int i = 0; i < tailLocations.size(); i++)
 	{
-		boardObject.gotoxy(positionX - i, positionY); cout << '-'; //removing old snake from the board 
+		boardObject.gotoxy(tailLocations[i].first, tailLocations[i].second); cout << '-'; //removing old snake from the board 
 	}
 	snakeLength = 3; 
 	direction = 2;
 	positionX = 10;
-	positionY = 9;	 
+	positionY = 9;
+	tailLocations.clear();
 }
